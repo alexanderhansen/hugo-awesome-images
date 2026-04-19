@@ -1,7 +1,7 @@
 {{ $file := .Get "src" }}
 {{ range .Page.Resources.ByType "image" }}
     {{ if eq .String $file}}
-        {{ $.Scratch.Set "imageSrc" . }}
+        {{ $.Store.Set "imageSrc" . }}
     {{ end }}
 {{ end }}
 
@@ -9,7 +9,7 @@
     {{- if .Get "link" -}}
         <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
     {{- end -}}
-    {{- $image := $.Scratch.Get "imageSrc" -}}
+    {{- $image := $.Store.Get "imageSrc" -}}
     <img class="lazy lightense"
         src="{{ ($image.Resize "1000x webp").Permalink }}"
         data-src="{{ ($image.Resize "1000x webp").Permalink }}"
